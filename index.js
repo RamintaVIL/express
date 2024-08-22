@@ -44,6 +44,27 @@ app.get('/services/team', (req, res) => {
     return res.send('Team page: Team page');
 })
 
+app.get('/sale', (req, res) => {
+    return res.send('Sales page');
+})
+
+app.get('/team', (req, res) => {
+    return res.send('Team page');
+})
+
+app.get('/team/chuck', (req, res) => {
+    return res.send('Team member page: Chuck');
+})
+
+app.get('/team/:name', (req, res) => {
+    return res.send(`Team member "${req.params.name}" page not found`);
+})
+
+
+// app.get('/sal/*-sale', (req, res) => {
+//     return res.send('Midseason Sales page');
+// })
+
 // * turi buti paskutine, nes  kitu etveju jis butu pirmas, ir grazintas tik jorezultatas esantis puslapyje
 app.get('*', (req, res) => {
     return res.send('Ups... 404 page 🦟');
