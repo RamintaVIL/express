@@ -16,29 +16,42 @@ app.get('/about', (req, res) => {
     return res.send('About page');
 })
 
+// paslaugu sarasas
 app.get('/services', (req, res) => {
     return res.send('Services page');
 })
 
-app.get('/services/design', (req, res) => {
-    return res.send('Services page: design');
-})
+// Like 4 routai (uzkomentuoti) nebeveiks, nes parametrizuotas reikalas esantis :serviceName, pagauna visus kitus atvejus.
+// Jei norime kazka individualiai daryti su zemiau esanciomis services paslaugomis tai iskelti ji po Servisec page.
 
-app.get('/services/ux', (req, res) => {
-    return res.send('Services page: UX');
-})
+app.get('/services/:serviceName', (req, res) => {
+    const services = ['design', 'ux', 'coding', 'managment'];
 
-app.get('/services/coding', (req, res) => {
-    return res.send('Services page: Programming');
-})
-
-app.get('/services/hacking', (req, res) => {
-    return res.send('Services page: Hacking');
-})
-
-app.get('/services/*', (req, res) => {
+    if (services.includes(req.params.serviceName)) {
+        return res.send(`About "${req.params.serviceName}" service...`)
+    }
     return res.send('Services page: such service is not recognized...');
 })
+
+// app.get('/services/design', (req, res) => {
+//     return res.send('Services page: design');
+// })
+
+// app.get('/services/ux', (req, res) => {
+//     return res.send('Services page: UX');
+// })
+
+// app.get('/services/coding', (req, res) => {
+//     return res.send('Services page: Programming');
+// })
+
+// app.get('/services/hacking', (req, res) => {
+//     return res.send('Services page: Hacking');
+// })
+
+// app.get('/services/*', (req, res) => {
+//     return res.send('Services page: such service is not recognized...');
+// })
 
 app.get('/services/team', (req, res) => {
     return res.send('Team page: Team page');
@@ -52,13 +65,18 @@ app.get('/team', (req, res) => {
     return res.send('Team page');
 })
 
-app.get('/team/chuck', (req, res) => {
-    return res.send('Team member page: Chuck');
-})
+// app.get('/team/chuck', (req, res) => {
+//     return res.send('Team member page: Chuck');
+// })
 
 app.get('/team/:name', (req, res) => {
+    const members = ['Chuck', 'lolo', 'prime']
+    if (members.includes(req.params.name)) {
+        return res.send(`Team member "${req.params.name}" all info about members`);
+    }
     return res.send(`Team member "${req.params.name}" page not found`);
 })
+
 
 
 // app.get('/sal/*-sale', (req, res) => {
