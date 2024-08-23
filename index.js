@@ -20,6 +20,9 @@ app.get('/about', (req, res) => {
 
 app.use('/services', servicesRouter);
 app.use('/team', teamRouter);
+app.use('/students', studentsRouter);
+app.use('/books', booksRouter);
+app.use('/phones', phonesRouter);
 
 
 
