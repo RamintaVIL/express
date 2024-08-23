@@ -1,5 +1,6 @@
-// require - sanasis node. atsinaujiname su import
+// require - senasis node. atsinaujiname su import
 import express from 'express';
+import { servicesData } from './data/servicesData';
 
 //inicijuoja app
 const app = express();
@@ -25,10 +26,23 @@ app.get('/services', (req, res) => {
 // Jei norime kazka individualiai daryti su zemiau esanciomis services paslaugomis tai iskelti ji po Servisec page.
 
 app.get('/services/:serviceName', (req, res) => {
-    const services = ['design', 'ux', 'coding', 'managment'];
-
-    if (services.includes(req.params.serviceName)) {
+    if (servicesData.includes(req.params.serviceName)) {
         return res.send(`About "${req.params.serviceName}" service...`)
+    }
+    return res.send('Services page: such service is not recognized...');
+})
+
+// darome is uzrasu praktiskai
+app.get('/services/:serviceName/members', (req, res) => {
+    if (servicesData.includes(req.params.serviceName)) {
+        return res.send(`Paslaugos "${req.params.serviceName}" nariu saras...`)
+    }
+    return res.send('Services page: such service is not recognized...');
+})
+
+app.get('/services/:serviceName/members/:memberName', (req, res) => {
+    if (servicesData.includes(req.params.serviceName)) {
+        return res.send(`Paslaugos "${req.params.serviceName}" nariu saras...`)
     }
     return res.send('Services page: such service is not recognized...');
 })
@@ -83,7 +97,7 @@ app.get('/team/:name', (req, res) => {
 //     return res.send('Midseason Sales page');
 // })
 
-// * turi buti paskutine, nes  kitu etveju jis butu pirmas, ir grazintas tik jorezultatas esantis puslapyje
+// * turi buti paskutinis, nes  kitu etveju jis butu pirmas, ir grazintas tik jorezultatas esantis puslapyje
 app.get('*', (req, res) => {
     return res.send('Ups... 404 page 🦟');
 })
