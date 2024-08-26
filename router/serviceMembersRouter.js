@@ -1,7 +1,11 @@
+import express from 'express';
+import { servicesData } from '../data/servicesData.js';
+import { members } from '../data/members.js';
 
+export const serviceMembersRouter = express.Router({ mergeParams: true })
 
 // darome is uzrasu praktiskai
-servicesRouter.get('/services/:serviceName/members', (req, res) => {
+serviceMembersRouter.get('/', (req, res) => {
     if (servicesData.includes(req.params.serviceName)) {
         return res.send(`Paslaugos "${req.params.serviceName}" nariu saras...`)
     }
@@ -46,7 +50,7 @@ servicesRouter.get('/services/:serviceName/members', (req, res) => {
 //     return res.send(response1)
 // });
 
-servicesRouter.get('/services/:serviceName/members/:memberName', (req, res) => {
+serviceMembersRouter.get('/memberName', (req, res) => {
     // destrukturizavimas ivyksta
     const { serviceName, memberName } = req.params;
 
