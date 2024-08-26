@@ -12,14 +12,18 @@ apiRouter.get('/', (req, res) => {
     return res.send(JSON.stringify(data));
 });
 
+const marks = [];
+
 apiRouter.get('/my-marks', (req, res) => {
-    const marks = [];
     return res.json(marks);
 });
 
-apiRouter.get('/my-marks', (req, res) => {
-    const marks = [10, 2, 8, 4, 6];
-    return res.json(marks);
+apiRouter.post('/my-marks', (req, res) => {
+    marks.push(10)
+    return res.json({
+        state: 'success',
+        message: 'Pazymys pridedas'
+    });
 });
 
 // API - aplication programming interface
