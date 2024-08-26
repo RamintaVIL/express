@@ -19,10 +19,81 @@ apiRouter.get('/my-marks', (req, res) => {
 });
 
 apiRouter.post('/my-marks', (req, res) => {
-    marks.push(10)
+    marks.push(req.body.mark);
+
     return res.json({
         state: 'success',
         message: 'Pazymys pridedas'
+    });
+});
+
+apiRouter.delete('/my-marks/:index', (req, res) => {
+    const { index } = req.params;
+    const position = parseFloat(index);
+
+    if (!Number.isInteger(position) || position < 0) {
+        return res.json({
+            state: 'error',
+            message: 'Pazymys turi buti ne neigiamas sveikasis skaicius'
+        });
+    };
+
+    if (marks.length === 0) {
+        return res.json({
+            state: 'error',
+            message: 'Pazymiu sarasas jau yra tuscias'
+        });
+    }
+
+    if (position >= marks.length) {
+        return res.json({
+            state: 'error',
+            message: `Pasilinti pazymio indexas negali virsyti ribos (riba: ${marks.length - 1}).`
+        });
+    }
+
+    marks.splice(position, 1);
+
+    return res.json({
+        state: 'success',
+        message: 'Pazymys pasalintas'
+    });
+});
+
+// /my-marks/:index/:newMark
+// /my-marks -> {index: 0, newMark: 10}
+// /my-marks/:index -> {newMark: 10}
+apiRouter.put('/my-marks/:index', (req, res) => {
+    const { index } = req.params;
+    const position = parseFloat(index);
+    const newMarkValue = req.body.newMark;
+
+
+    if (!Number.isInteger(position) || position < 0) {
+        return res.json({
+            state: 'error',
+            message: 'Pazymio pozicija (index) turi buti ne neigiamas sveikasis skaicius'
+        });
+    };
+
+    if (marks.length === 0) {
+        return res.json({
+            state: 'error',
+            message: 'Pazymiu sarasas jau yra tuscias, nera ko redaguoti'
+        });
+    }
+    if (position >= marks.length) {
+        return res.json({
+            state: 'error',
+            message: `redaguoti pazymio indexas negali virsyti ribos (riba: ${marks.length - 1}).`
+        });
+    }
+
+    marks[position] = newMarkValue;
+
+    return res.json({
+        state: 'success',
+        message: 'Pazymys paredaguotas',
     });
 });
 
