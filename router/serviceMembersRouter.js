@@ -83,4 +83,4 @@ serviceMembersRouter.get('/memberName', (req, res) => {
 
 // app.get('/services/*', (req, res) => {
 //     return res.send('Services page: such service is not recognized...');
-// })
+// });

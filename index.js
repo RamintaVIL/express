@@ -5,7 +5,7 @@ import { teamRouter } from './router/teamRouter.js'
 import { studentsRouter } from './router/studentsRouter.js';
 import { booksRouter } from './router/booksRouter.js';
 import { phonesRouter } from './router/phonesRouter.js';
-import { apiRouter } from './router/apiRouter.js';
+// import { apiRouter } from './router/apiRouter.js';
 
 //inicijuoja app
 const app = express();
@@ -37,7 +37,7 @@ app.get('/img/logo.png', (req, res) => {
     ; return res.send('Images: logo.png turinys...');
 })
 
-app.use('/api, apiRouter');
+// app.use('/api, apiRouter');
 app.use('/services', servicesRouter);
 app.use('/team', teamRouter);
 app.use('/students', studentsRouter);

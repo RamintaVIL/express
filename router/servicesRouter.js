@@ -1,6 +1,6 @@
 import express from 'express';
 import { servicesData } from '../data/servicesData.js';
-import { serviceMembersRouter } from '../data/serviceMembersRouter.js';
+import { serviceMembersRouter } from './serviceMembersRouter.js';
 
 export const servicesRouter = express.Router();
 
